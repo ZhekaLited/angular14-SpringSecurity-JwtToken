@@ -1,0 +1,48 @@
+﻿<style>
+  @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
+</style>
+<head>
+  <title>SignUp</title>
+</head>
+<div class="imge" style="background-image: url('assets/images/Personpg.jpg');"></div>
+<div class="site-logo"><a>LookSoft</a>
+  <div class=" animate fadeInUp one">
+    <div>
+      <div class="blockk">
+        <div class="form-logo">
+          <h3>{{'HOME.TITLE' | translate}}</h3>
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label class="form-label"></label>
+            <input id="username1" type="text" formControlName="username" class="log p-inputtext" placeholder="{{'HOME.plLogin' | translate}}"
+                   [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                            <div *ngIf="f.username.errors.required" class="red-error">{{'HOME.errLogin' | translate}}</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" formControlName="password"
+                   class="p-inputtext p-component p-element p-password-input pass" placeholder="{{'HOME.plPass' | translate}}"
+                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+            <div *ngIf="submitted && f.password.errors"  class="ng-invalid ng-dirty">
+                            <div *ngIf="f.password.errors.required" class="red-error-pass">{{'HOME.errPass' | translate}}</div>
+            </div>
+          </div>
+          <button pButton pRipple [disabled]="loading" label="{{'HOME.Button' | translate}}"
+                  class="p-button-rounded p-button-help button-login">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+          </button>
+                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="grey-block">
+    <button class="lang-icon" (click)="useLanguage('ru')"><img src="assets/images/russia.png" alt="ruflag" height="28px"></button>
+    <button class="lang-icon" (click)="useLanguage('en')"><img src="assets/images/usa.png" alt="ruflag" height="28px"></button>
+  </div>
+</div>

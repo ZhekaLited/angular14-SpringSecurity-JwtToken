@@ -1,0 +1,19 @@
+{
+  "HOME": {
+    "TITLE": "Sign Up",
+    "Button": "Input",
+    "plLogin": "Login",
+    "plPass": "Password",
+    "errLogin": "Login is invalide",
+    "errPass": "Password is invalide"
+  },
+  "HOMEPAGE": {
+    "TITLE": "Welcome",
+    "logOut": "LogOut",
+    "titleGrey": "We are proud to show you a few of our recent projects",
+    "textGreyFirs": "Doctena is an online platform dedicated to help patients search for practitioners (doctors, nurses) and organize appointments with them.",
+    "textGreySec": "LottieFiles is now used by animation and motion designers at 150,000 companies.",
+    "textGreyTh": "A strategy game is a genre of computer games in which the player must use strategic thinking to win"
+
+  }
+}

@@ -1,0 +1,174 @@
+.imge {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-size: cover;
+  background-position: center;
+}
+
+.imge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(54 58 64 / 85%);
+  z-index: 5;
+}
+
+.site-logo {
+  cursor: default;
+  position: relative;
+  font-weight: 1000;
+  font-size: 24px;
+  color: #ffffff;
+  top: 23px;
+  margin-left: 102px;
+  font-family: 'Kanit', sans-serif;
+}
+
+.site-logo a {
+  color: white;
+}
+
+.blockk {
+  padding: 286px 33px 114px !important;;
+  background: white !important;
+  border-radius: 20px !important;
+  width: 460px !important;
+  margin-left: 24% !important;
+  margin-right: auto !important;
+  margin-top: 51px !important;
+  box-shadow: 0 1px 20px rgb(0 0 0 / 60%)
+}
+
+.animate {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.one {
+  -webkit-animation-delay: 0.4s;
+  -moz-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+@-webkit-keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
+
+.pass {
+  padding-right: 201px;
+  position: absolute;
+  margin-top: 10%;
+  margin-left: -100px;
+}
+
+.log {
+  position: absolute;
+  margin-top: 2%;
+  margin-left: 0%;
+  padding-right: 197px;
+}
+
+.form-logo {
+  //position: absolute;
+  text-align: center;
+  font-weight: 100;
+  font-size: 24px;
+  color: black;
+  //margin-left: 136px;
+  margin-top: -270px;
+  cursor: default;
+  font-family: 'Montserrat', sans-serif;
+
+}
+
+.button-login {
+  position: absolute;
+  margin-top: 182px;
+  margin-left: 90px;
+  width: 18%;
+  font-family: 'Julius Sans One', sans-serif;
+}
+
+.red-error {
+  position: absolute;
+  color: red;
+  margin-top: 80px;
+  margin-left: 97px;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.red-error-pass {
+  position: absolute;
+  color: red;
+  font-size: 20px;
+  margin-top: 139px;
+  margin-left: 97px;
+  font-weight: 100;
+}
+
+.grey-block {
+  height: 106px;
+  width: 54px;
+  background-color: #605f5f;
+  position: fixed;
+  border-radius: 7px;
+  top: 74%;
+  left: 96%;
+  right: 0;
+}
+
+.lang-icon {
+  background: transparent;
+  border: none;
+  height: 30px;
+  margin-left: 15%;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+//.langUsa {
+//  background: transparent;
+//  border: none;
+//  height: 30px;
+//  margin-left: 15%;
+//  margin-top: 20px;
+//  cursor: pointer;
+//}

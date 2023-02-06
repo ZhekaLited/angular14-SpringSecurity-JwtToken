@@ -1,0 +1,45 @@
+﻿<style>
+  @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Heebo&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+</style>
+<head>
+  <title>Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+</head>
+<div>
+  <h2 class="site-title">{{'HOMEPAGE.TITLE' | translate}}</h2>
+  <p class="site-text">{{'HOMEPAGE.titleGrey' | translate}}</p>
+  <img src="assets/images/soft.png" class="img-flud">
+  <h2 class="doc-text">DOCTENA - MOBILE APPLICATION</h2>
+  <p class="doc-text-gray">{{'HOMEPAGE.textGreyFirs' | translate}}</p>
+</div>
+<div>
+  <img src="assets/images/soft.jpg" class="img-flud-sec">
+  <h2 class="doc-text-sec">LottieFiles</h2>
+  <p class="doc-text-gr-sec">{{'HOMEPAGE.textGreySec' | translate}}</p>
+</div>
+<div data-aos="slide-up">
+  <img src="assets/images/gamessec.jpg" class="img-flud-th" >
+  <h2 class="doc-text-th">ButtleTech</h2>
+  <p class="doc-text-gr-th">{{'HOMEPAGE.textGreyTh' | translate}}</p>
+</div>
+<div class="grey__block">
+  <button class="lang-icon" (click)="useLanguage('ru')"><img src="assets/images/russia.png" alt="ruflag" height="28px"></button>
+  <button class="lang-icon" (click)="useLanguage('en')"><img src="assets/images/usa.png" alt="ruflag" height="28px"></button>
+</div>
+<div class="footer-basic">
+  <footer>
+    <div class="social"><a href="https://www.instagram.com/"><i class="icon ion-social-instagram"></i></a><a
+      href="https://www.snapchat.com/"><i class="icon ion-social-snapchat"></i></a><a
+      href="https://twitter.com/?lang=ru"><i class="icon ion-social-twitter"></i></a><a
+      href="https://ru-ru.facebook.com/"><i class="icon ion-social-facebook"></i></a></div>
+    <p class="copyright">LookSoft © 2014</p>
+  </footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
