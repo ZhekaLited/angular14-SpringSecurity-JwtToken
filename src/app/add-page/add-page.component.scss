@@ -1,0 +1,51 @@
+.blockk {
+  padding: 401px 33px 114px !important;
+  background: white !important;
+  border-radius: 20px !important;
+  width: 749px !important;
+  margin-left: 21% !important;
+  margin-right: auto !important;
+  margin-top: 64px !important;
+  box-shadow: 0 2px 13px rgb(0 0 0 / 60%);
+}
+.block-title {
+  text-align: center;
+  margin-top: -51%;
+  font-size: 35px;
+  font-family: 'Montserrat', sans-serif;
+}
+.window-write {
+  width: 291px !important;
+  height: 48px !important;
+  padding: 6px 20px !important;
+  margin: 11px 363px !important;
+  box-sizing: border-box !important;
+  border: 3px solid #ccc !important;
+  -webkit-transition: 0.5s !important;
+  transition: 0.5s !important;
+  outline: none !important;
+  margin-left: -296px !important;
+}
+
+.window-write:focus {
+  border: 3px solid #555 !important;
+}
+.form-dts {
+  display: grid !important;
+  grid-template-columns: auto auto !important;
+  margin-top: 7% !important;
+  margin-left: 45% !important;
+}
+.form-role {
+  margin-top: -59px;
+  margin-left: 368px;
+  position: absolute;
+}
+.button-add-page {
+  margin-top: 4%;
+  margin-left: 261px;
+  width: 142px;
+  height: 58px;
+  border-radius: 23px;
+  position: absolute;
+}

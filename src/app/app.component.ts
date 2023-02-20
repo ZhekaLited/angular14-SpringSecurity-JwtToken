@@ -5,6 +5,7 @@ import {User, Role} from './_models';
 
 import {TranslateService} from "@ngx-translate/core";
 import {Global} from "src/app/globals";
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -15,21 +16,21 @@ import {Global} from "src/app/globals";
 
 })
 export class AppComponent {
+  [x: string]: any;
   user?: User | null;
 
-  constructor(private authenticationService: AuthenticationService, private translate: TranslateService,
-  ) {
+  constructor(private authenticationService: AuthenticationService, private translate: TranslateService) {
     this.authenticationService.user.subscribe(x => this.user = x);
     translate.setDefaultLang(Global.language);
     translate.use(Global.language);
+
   }
-  
-  
+
+
 
   get isAdmin() {
     return this.user?.role === Role.Admin;
   }
-
   logout() {
     this.authenticationService.logout();
   }

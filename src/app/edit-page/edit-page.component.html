@@ -1,0 +1,24 @@
+<title>Edit</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+</style>
+<div class="blockk">
+  <h2 class="block-title">{{'EDITPAGE.TITLE' | translate}}</h2>
+
+  <form [formGroup]="updateusersForm" (ngSubmit)="submitForm()" novalidate>
+    <div class="form-dts">
+      <input type="hidden" formControlName="id"/>
+      <input class="window-write" type="text" formControlName="login"  placeholder="{{'ADMINPAGE.login' | translate}}" required>
+      <input class="window-write" type="text" formControlName="password"  placeholder="{{'ADMINPAGE.password' | translate}}" required>
+      <input class="window-write" type="text" formControlName="salary"  placeholder="{{'ADMINPAGE.salary' | translate}}" required>
+      <input class="window-write" type="text" formControlName="name"  placeholder="{{'ADMINPAGE.name' | translate}}" required>
+      <input class="window-write" type="text" formControlName="birthday"  placeholder="{{'ADMINPAGE.birthday' | translate}}" required>
+    </div>
+    <button pButton type="submit" label="{{'EDITPAGE.BUTTONEDIT' | translate}}" class="p-button-secondary button-add-page"></button>
+    <div *ngIf ="roles.toString()" class="form-role">
+      <p-multiSelect [options]="roles"  formControlName="roles" placeholder="{{'ADMINPAGE.roleButton' | translate}}"  optionLabel="name">
+      </p-multiSelect>
+    </div>
+  </form>
+</div>

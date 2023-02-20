@@ -1,0 +1,24 @@
+<title>Add</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+</style>
+<div class="blockk">
+  <h2 class="block-title">{{'ADMINPAGE.TITLE' | translate}}</h2>
+
+  <form [formGroup]="usersForm" (ngSubmit)="submitForm()" novalidate>
+    <div class="form-dts">
+      <input class="window-write" type="text" formControlName="login"  placeholder="{{'ADMINPAGE.login' | translate}}" required>
+      <input class="window-write" type="text" formControlName ="password" placeholder="{{'ADMINPAGE.password' | translate}}" required>
+      <input class="window-write" type="text" formControlName ="salary" placeholder="{{'ADMINPAGE.salary' | translate}}" required>
+      <input class="window-write" type="text" formControlName ="name" placeholder="{{'ADMINPAGE.name' | translate}}" required>
+      <input class="window-write" type="text" formControlName ="birthday" placeholder="{{'ADMINPAGE.birthday' | translate}}" required>
+    </div>
+<button pButton type="submit" label="{{'ADMINPAGE.BUTTONADD' | translate}}" class="p-button-secondary button-add-page"></button>
+    <div class="form-role">
+    <p-multiSelect  [options]="roles" formControlName="roles" defaultLabel="{{'ADMINPAGE.roleButton' | translate}}" optionLabel="name">
+    </p-multiSelect>
+    </div>
+  </form>
+</div>
+

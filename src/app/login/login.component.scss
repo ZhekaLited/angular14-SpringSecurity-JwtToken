@@ -39,7 +39,7 @@
   background: white !important;
   border-radius: 20px !important;
   width: 460px !important;
-  margin-left: 24% !important;
+  margin-left: 26% !important;
   margin-right: auto !important;
   margin-top: 51px !important;
   box-shadow: 0 1px 20px rgb(0 0 0 / 60%)
@@ -95,7 +95,7 @@
   padding-right: 201px;
   position: absolute;
   margin-top: 10%;
-  margin-left: -100px;
+  margin-left: -2px;
 }
 
 .log {
@@ -120,7 +120,7 @@
 
 .button-login {
   position: absolute;
-  margin-top: 182px;
+  margin-top: 225px;
   margin-left: 90px;
   width: 18%;
   font-family: 'Julius Sans One', sans-serif;
@@ -133,15 +133,17 @@
   margin-left: 97px;
   font-size: 20px;
   font-weight: 100;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .red-error-pass {
   position: absolute;
   color: red;
   font-size: 20px;
-  margin-top: 139px;
+  margin-top: 177px;
   margin-left: 97px;
   font-weight: 100;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .grey-block {
@@ -163,12 +165,3 @@
   margin-top: 12px;
   cursor: pointer;
 }
-
-//.langUsa {
-//  background: transparent;
-//  border: none;
-//  height: 30px;
-//  margin-left: 15%;
-//  margin-top: 20px;
-//  cursor: pointer;
-//}

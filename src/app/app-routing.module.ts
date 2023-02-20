@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home';
 import { AdminComponent } from './admin';
 import { LoginComponent } from './login';
+import { AddPageComponent } from './add-page/add-page.component';
+import { EditPageComponent } from './edit-page/edit-page.component'
 import { AuthGuard } from './_helpers';
 import { Role } from './_models';
 
@@ -16,6 +18,16 @@ const routes: Routes = [
     {
         path: 'admin',
         component: AdminComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
+    },{
+        path: 'addPage',
+        component: AddPageComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
+    },{
+        path: 'editPage/:id',
+        component: EditPageComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin] }
     },

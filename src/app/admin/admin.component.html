@@ -6,32 +6,31 @@
     <ng-template pTemplate="header">
       <tr>
         <th style="min-width:100px">Id</th>
-        <th style="min-width:200px">UserName</th>
-        <th style="min-width:200px">Password</th>
-        <th style="min-width:200px">FirstName</th>
-        <th style="min-width:200px">LastName</th>
-        <th style="min-width:200px">Role</th>
+        <th style="min-width:130px">Login</th>
+        <th style="min-width:130px">Password</th>
+        <th style="min-width:130px">Age</th>
+        <th style="min-width:130px">Salary</th>
+        <th style="min-width:130px">Name</th>
+        <th style="min-width:130px">Birthday</th>
+        <th style="min-width:120px">Role</th>
+        <th style="min-width:120px">Action</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-users>
       <tr>
         <td>{{users.id}}</td>
-        <td>{{users.username}}</td>
+        <td>{{users.login}}</td>
         <td>{{users.password}}</td>
-        <td>{{users.firstName}}</td>
-        <td>{{users.lastName}}</td>
-        <td>{{users.role}}</td>
+        <td>{{users.age}}</td>
+        <td>{{users.salary}}</td>
+        <td>{{users.name}}</td>
+        <td>{{users.birthday}}</td>
+        <td>{{takeRole(users.roles)}}</td>
+        <td><img src="assets/images/2355277.png" routerLink="/editPage/{{users.id}}" routerLinkActive="active" class="icons">
+          <img src="assets/images/4470034.png" (click)="deleteUser(users.login)" onClick="window.location.reload()" class="icons-del"></td>
       </tr>
     </ng-template>
-<!--    <ng-template pTemplate="footer">-->
-<!--      <tr>-->
-<!--        <td>Id</td>-->
-<!--        <td>UserName</td>-->
-<!--        <td>Password</td>-->
-<!--        <td>LastName</td>-->
-<!--        <td>FistName</td>-->
-<!--        <td>Role</td>-->
-<!--      </tr>-->
-<!--    </ng-template>-->
   </p-table>
 </div>
+<button pButton type="button" routerLink="/addPage" routerLinkActive="active" label="{{'ADMINPAGE.BUTTONADD' | translate}}" class="p-button-secondary button-add"></button>
+

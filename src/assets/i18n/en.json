@@ -14,6 +14,19 @@
     "textGreyFirs": "Doctena is an online platform dedicated to help patients search for practitioners (doctors, nurses) and organize appointments with them.",
     "textGreySec": "LottieFiles is now used by animation and motion designers at 150,000 companies.",
     "textGreyTh": "A strategy game is a genre of computer games in which the player must use strategic thinking to win"
-
+  },
+  "ADMINPAGE": {
+    "BUTTONADD": "ADD",
+    "TITLE": "Add Panel",
+    "login": "Login",
+    "salary": "Salary",
+    "password": "Password",
+    "name": "Name",
+    "birthday": "Birthday: yyyy-mm-dd",
+    "roleButton": "Select roles for User"
+  },
+  "EDITPAGE": {
+    "BUTTONEDIT": "EDIT",
+    "TITLE": "Edit Panel"
   }
 }
