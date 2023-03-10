@@ -1,32 +1,36 @@
 ﻿import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from '@angular/router';
 
 import { AuthenticationService } from '@app/_services';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
-    constructor(
-        private router: Router,
-        private authenticationService: AuthenticationService
-    ) { }
+export class AuthGuard implements CanActivate,CanActivateChild {
+  constructor(private router: Router) { }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const user = this.authenticationService.userValue;
-        if (user) {
-            // check if route is restricted by role
-            const { roles } = route.data;
-            if (roles && !roles.includes(user.role)) {
-                // role not authorized so redirect to home page
-                this.router.navigate(['/']);
-                return false;
-            }
-
-            // authorized so return true
-            return true;
-        }
-
-        // not logged in so redirect to login page with the return url
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-        return false;
+  public canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    if (!this.hasAccessToken()) {
+      this.redirectToLogin();
+      return false;
     }
+
+    return true;
+  }
+
+  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+    if (!this.hasAccessToken()) {
+      this.redirectToLogin();
+      return false;
+    }
+
+    return true;
+  }
+
+  private hasAccessToken(): boolean {
+    return localStorage.getItem("access_token") != null;
+  }
+
+  private redirectToLogin() {
+    this.router.navigateByUrl("/login");
+  }
 }

@@ -1,8 +1,8 @@
-﻿<div *ngIf="user">
+﻿<div *ngIf="panelIsVisible">
   <a class="site-logo" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">LookSoft</a>
-        <a class="adm-logo" routerLink="/admin" routerLinkActive="active" *ngIf="isAdmin">ADMIN</a>
+        <a class="adm-logo" routerLink="/admin" routerLinkActive="active" *ngIf="isAdminRole">ADMIN</a>
   <div class="blockk"></div>
-        <h4 class="log-logo" (click)="logout()">{{'HOMEPAGE.logOut' | translate}}</h4>
+        <h4 class="log-logo" onClick="window.location.reload()" (click)="logOut()">{{'HOMEPAGE.logOut' | translate}}</h4>
 </div>
 <div class="container">
   <router-outlet></router-outlet>

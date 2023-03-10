@@ -56,8 +56,6 @@ export class AdminComponent implements OnInit {
   }
 
   ViewuserDetail(user_id : any){
-//    let url: string = '/editPage'+ user_id
     this.router.navigate(['editPage', user_id]);
-//    this.router.navigateByUrl(url);
   }
 }

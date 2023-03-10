@@ -1,5 +1,4 @@
-﻿import { Role } from "./role";
-import { Roles } from "./Roles";
+﻿import { Roles } from "./Roles";
 
 export interface User {
     [x: string]: any;
@@ -13,6 +12,5 @@ export interface User {
     roles: Roles[] ;
     lastName: string;
     username: string;
-    role: Role;
     token?: string;
 }

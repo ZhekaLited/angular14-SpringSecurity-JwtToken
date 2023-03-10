@@ -1,38 +1,61 @@
-﻿import {Component, Inject} from '@angular/core';
+﻿import {Component, HostListener, Inject, OnDestroy, OnInit} from '@angular/core';
 
 import {AuthenticationService} from './_services';
-import {User, Role} from './_models';
+import {User} from './_models';
 
 import {TranslateService} from "@ngx-translate/core";
 import {Global} from "src/app/globals";
-import { HttpClient } from '@angular/common/http';
-
+import {HttpClient} from '@angular/common/http';
+import {AuthenticationRequestDto} from './_models/AuthenticationRequestDto';
+import {Roles} from './_models/Roles';
+import {UserService} from "src/app/_services/user.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['./app.component.scss'],
-  //providers: [/* other providers, */ {provide: 'languageType', useValue: 'en'}]
 
 })
-export class AppComponent {
-  [x: string]: any;
-  user?: User | null;
 
-  constructor(private authenticationService: AuthenticationService, private translate: TranslateService) {
-    this.authenticationService.user.subscribe(x => this.user = x);
+export class AppComponent implements OnInit, OnDestroy {
+  [x: string]: any;
+
+  currentUser!: AuthenticationRequestDto;
+
+  user!: User;
+  panelIsVisible!: boolean;
+  isAdminRole: boolean;
+  loginFromForm:string;
+
+  constructor(private UserService: UserService, private authenticationService: AuthenticationService, private translate: TranslateService) {
     translate.setDefaultLang(Global.language);
     translate.use(Global.language);
-
   }
 
+  ngOnInit() {
+    //Во время загрузки страницы
+    const recoveryLogin = window.localStorage.getItem("access_login");
+    if (recoveryLogin != null && recoveryLogin != "") {
+      this.loginFromForm = recoveryLogin;
 
-
-  get isAdmin() {
-    return this.user?.role === Role.Admin;
+      const recoveryIsAdmin = window.localStorage.getItem("access_admin");
+      if (recoveryIsAdmin != null && recoveryLogin !== "") {
+        this.isAdminRole = recoveryIsAdmin === "true";
+        if(this.isAdminRole) {
+          this.panelIsVisible = true;
+        }
+      }
+    }
   }
-  logout() {
-    this.authenticationService.logout();
+
+  ngOnDestroy() {
+    window.localStorage.removeItem('access_login');
+    window.localStorage.removeItem('access_admin');
+  }
+  
+  logOut() {
+    window.localStorage.setItem('access_login', this.loginFromForm);
+    this.UserService.logout();
   }
 
   useLanguage(language: string): void {

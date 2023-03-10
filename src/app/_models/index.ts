@@ -1,2 +1,2 @@
-﻿export * from './role';
+﻿export * from './Roles';
 export * from './user';

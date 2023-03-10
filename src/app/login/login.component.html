@@ -14,29 +14,29 @@
         <div class="form-logo">
           <h3>{{'HOME.TITLE' | translate}}</h3>
         </div>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="detailsForm" (ngSubmit)="onSubmit()">
           <div class="mb-3">
             <label class="form-label"></label>
-            <input id="username1" type="text" formControlName="username" class="log p-inputtext" placeholder="{{'HOME.plLogin' | translate}}"
-                   [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
-            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                            <div *ngIf="f.username.errors.required" class="red-error">{{'HOME.errLogin' | translate}}</div>
+            <input id="username1" type="text" formControlName="login" class="log p-inputtext" placeholder="{{'HOME.plLogin' | translate}}"
+                   [ngClass]="{ 'is-invalid': submittted && f.login.errors }"/>
+            <div *ngIf="submittted && f.login.errors" class="invalid-feedback">
+              <div *ngIf="f.login.errors.required" class="red-error">{{'HOME.errLogin' | translate}}</div>
             </div>
           </div>
           <div class="mb-3">
             <label class="form-label"></label>
             <input type="password" formControlName="password"
                    class="p-inputtext p-component p-element p-password-input pass" placeholder="{{'HOME.plPass' | translate}}"
-                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
-            <div *ngIf="submitted && f.password.errors"  class="ng-invalid ng-dirty">
-                            <div *ngIf="f.password.errors.required" class="red-error-pass">{{'HOME.errPass' | translate}}</div>
-            </div>
+                 [ngClass]="{ 'is-invalid': submittted && f.password.errors }"/>
+                   <div *ngIf="submittted && f.password.errors"  class="ng-invalid ng-dirty">
+                 <div *ngIf="f.password.errors.required" class="red-error-pass">{{'HOME.errPass' | translate}}</div>
           </div>
-          <button pButton pRipple [disabled]="loading" label="{{'HOME.Button' | translate}}"
+          </div>
+          <button pButton pRipple  (click)="save()" label="{{'HOME.Button' | translate}}"
                   class="p-button-rounded p-button-help button-login">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+<!--            <span *ngIf="errors" class="spinner-border spinner-border-sm me-1"></span>-->
           </button>
-                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+<!--                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>-->
         </form>
       </div>
     </div>

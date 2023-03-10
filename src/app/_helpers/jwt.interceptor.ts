@@ -1,27 +1,40 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 import { environment } from '@environments/environment';
 import { AuthenticationService } from '@app/_services';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-    constructor(private authenticationService: AuthenticationService) { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        // add auth header with jwt if user is logged in and request is to api url
-        const user = this.authenticationService.userValue;
-        const isLoggedIn = user?.token;
-        const isApiUrl = request.url.startsWith(environment.apiUrl);
-        if (isLoggedIn && isApiUrl) {
-            request = request.clone({
-                setHeaders: {
-                    Authorization: `Bearer ${user.token}`
-                }
-            });
-        }
+  constructor(private router: Router) { }
 
-        return next.handle(request);
-    }
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    let token = localStorage.getItem("access_token");
+    if (token) {
+      const cloneReq = request.clone({
+        headers: request.headers.set(
+          "Authorization",
+          "Bearer " + token
+        ),
+      });
+
+      return next.handle(cloneReq).pipe(
+        tap(
+          (succ) => {},
+          (err) => {
+            if (err.status == 401 || err.status == 403) {
+              localStorage.removeItem("access_token");
+              this.router.navigateByUrl("/login");
+            }
+          }
+        )
+      );
+    } else return next.handle(request.clone());
+  }
 }

@@ -10,14 +10,11 @@ import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {MultiSelectModule} from 'primeng/multiselect';
 
-// used to create fake backend
-import { fakeBackendProvider} from './_helpers';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { JwtInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { AdminComponent } from './admin';
 import { LoginComponent } from './login';
@@ -70,11 +67,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
           UserService,
-
-        // provider used to create fake backend
-        fakeBackendProvider
+      
     ],
     bootstrap: [AppComponent]
 })

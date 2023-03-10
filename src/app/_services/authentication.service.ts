@@ -1,43 +1,106 @@
-﻿import { Injectable } from '@angular/core';
+﻿import {Inject, Injectable, Optional } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { User } from '@app/_models';
+import { AuthenticationRequestDto } from '@app/_models/AuthenticationRequestDto';
+import { Configuration } from './configuration';
+import { BASE_PATH, COLLECTION_FORMATS } from './variables';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    private userSubject: BehaviorSubject<User | null>;
-    public user: Observable<User | null>;
+  [x: string]: any;
 
-    constructor(
-        private router: Router,
-        private http: HttpClient
-    ) {
-        this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
-        this.user = this.userSubject.asObservable();
+
+  protected basePath = 'http://localhost:8080';
+  public defaultHeaders = new HttpHeaders();
+  public configuration = new Configuration();
+  private userSubject!: BehaviorSubject<User | null>;
+
+
+  constructor( router: Router, protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    if (basePath) {
+      this.basePath = basePath;
     }
 
-    public get userValue() {
-        return this.userSubject.value;
+    if (configuration) {
+      this.configuration = configuration;
+      this.basePath = basePath || configuration.basePath || this.basePath;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
-            .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-                this.userSubject.next(user);
-                return user;
-            }));
+  }
+
+
+  /**
+   * @param consumes string[] mime-types
+   * @return true: consumes contains 'multipart/form-data', false: otherwise
+   */
+  private canConsumeForm(consumes: string[]): boolean {
+    const form = 'multipart/form-data';
+    for (const consume of consumes) {
+      if (form === consume) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Login
+   *
+   * @param body
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param reportProgress flag to report request and response progress.
+   */
+  public login(body?: AuthenticationRequestDto, observe?: 'body', reportProgress?: boolean): Observable<string>;
+  public login(body?: AuthenticationRequestDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
+  public login(body?: AuthenticationRequestDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
+  public login(body?: AuthenticationRequestDto, observe?: 'responseType', reportProgress?: boolean): Observable<HttpResponse<string>>;
+  public login(body?: AuthenticationRequestDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+    let headers = this.defaultHeaders;
+
+    // authentication (Bearer) required
+    if (this.configuration.accessToken) {
+      const accessToken = typeof this.configuration.accessToken === 'function'
+        ? this.configuration.accessToken()
+        : this.configuration.accessToken;
+      console.log(accessToken);
+      headers = headers.set('Authorization', 'Bearer ' + accessToken);
+    }
+    // to determine the Accept header
+    let httpHeaderAccepts: string[] = [
+      'text/plain',
+      'application/json',
+      'text/json'
+    ];
+    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    if (httpHeaderAcceptSelected != undefined) {
+      headers = headers.set('Accept', httpHeaderAcceptSelected);
     }
 
-    logout() {
-        // remove user from local storage to log user out
-        localStorage.removeItem('user');
-        this.userSubject.next(null);
-        this.router.navigate(['/login']);
+    // to determine the Content-Type header
+    const consumes: string[] = [
+      'application/json',
+      'json/text',
+      'application/_*+json'
+    ];
+    const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+    if (httpContentTypeSelected != undefined) {
+      headers = headers.set('Content-Type', httpContentTypeSelected);
     }
+    return this.httpClient.request('post',`http://localhost:8080/api/v1/auth/login `,
+      {
+        body: body,
+        responseType: 'text',
+        withCredentials: this.configuration.withCredentials,
+        headers: headers,
+        observe: observe,
+        reportProgress: reportProgress
+      },
+    );
+  }
 }
